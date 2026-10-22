@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { AnimatePresence, motion, useScroll, useSpring, useTransform } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
 import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, CheckCircle2, Instagram, Mail, Menu, Play, X } from "lucide-react";
 import Pricing from "@/components/ui/pricing-02";
 import { Button } from "@/components/ui/button";
@@ -20,9 +20,14 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<(typeof projects)[number] | null>(null);
   const [sent, setSent] = useState(false);
+  const aboutRef = useRef<HTMLElement>(null);
   const portfolioRef = useRef<HTMLElement>(null);
+  const reducedMotion = useReducedMotion();
   const { scrollYProgress } = useScroll();
   const pageProgress = useSpring(scrollYProgress, { stiffness: 110, damping: 30, restDelta: 0.001 });
+  const { scrollYProgress: aboutProgress } = useScroll({ target: aboutRef, offset: ["start end", "end start"] });
+  const aboutImageY = useTransform(aboutProgress, [0, 1], [-50, 50]);
+  const aboutImageScale = useTransform(aboutProgress, [0, 0.5, 1], [1.06, 1, 1.06]);
   const { scrollYProgress: portfolioProgress } = useScroll({ target: portfolioRef, offset: ["start start", "end end"] });
   const trackX = useTransform(portfolioProgress, [0, 1], ["0%", "-66%"]);
 
@@ -77,39 +82,40 @@ function App() {
         <div className="relative z-10 mx-auto flex w-full max-w-7xl items-center justify-between border-t border-white/15 pt-5 text-[10px] uppercase tracking-[.18em] text-white/45"><span>Baseado no Brasil · Disponível para projetos</span><span className="hidden md:block">Role para descobrir</span></div>
       </section>
 
-      <section id="quem-sou" className="relative bg-[#f6f5f2] text-[#191714]">
+      <section ref={aboutRef} id="quem-sou" className="relative bg-[#f6f5f2] text-[#191714]">
         <div className="relative overflow-hidden bg-[#eeece9]">
-          <img
+          <motion.img
             src="/images/miguel-tenorio-about-banner.png"
             alt="Miguel Tenório em retrato preto e branco"
             loading="lazy"
-            className="absolute inset-x-0 top-0 h-[440px] w-full object-cover object-[32%_center] md:h-full md:object-center"
+            style={{ y: reducedMotion ? 0 : aboutImageY, scale: reducedMotion ? 1 : aboutImageScale }}
+            className="absolute inset-x-0 -top-16 h-[568px] w-full object-cover object-[32%_center] md:h-[calc(100%+128px)] md:object-center"
           />
           <div className="pointer-events-none absolute inset-x-0 top-[360px] h-32 bg-gradient-to-b from-transparent to-[#f6f5f2] md:hidden" />
           <div className="relative mx-auto flex min-h-[730px] max-w-7xl items-end px-4 pb-10 pt-[390px] md:min-h-[680px] md:items-center md:justify-end md:px-8 md:py-20">
             <motion.div
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={reducedMotion ? false : "hidden"}
+              whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.7 }}
+              variants={{ hidden: { opacity: 0, y: 64 }, visible: { opacity: 1, y: 0, transition: { duration: 0.75, staggerChildren: 0.18 } } }}
               className="w-full bg-[#f6f5f2]/95 px-7 py-9 shadow-[0_18px_70px_rgba(28,25,22,.11)] backdrop-blur-md sm:px-10 md:max-w-[560px] md:px-12 md:py-12"
             >
-              <h2 className="font-display text-[clamp(2.25rem,4.1vw,3.75rem)] font-medium leading-[1.04] tracking-[-.055em]">
+              <motion.h2 variants={{ hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }} className="font-display text-[clamp(2.25rem,4.1vw,3.75rem)] font-medium leading-[1.04] tracking-[-.055em]">
                 Eu não registro apenas o que acontece. <span className="text-black/35">Eu encontro o que merece ser sentido.</span>
-              </h2>
-              <p className="mt-7 max-w-[440px] text-sm leading-7 text-black/60">
+              </motion.h2>
+              <motion.p variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }} className="mt-7 max-w-[440px] text-sm leading-7 text-black/60">
                 Sou Miguel Tenório, videomaker apaixonado por narrativas honestas, luz natural e imagens que têm tempo para respirar. Trabalho da primeira conversa ao corte final, construindo uma linguagem visual própria para cada projeto.
-              </p>
+              </motion.p>
             </motion.div>
           </div>
         </div>
         <div className="mx-auto grid max-w-7xl border-t border-black/10 px-4 py-9 md:grid-cols-3 md:px-8 md:py-12">
-          {[["01", "Direção com intenção", "Cada escolha visual nasce da mensagem — nunca do efeito pelo efeito."], ["02", "Processo próximo", "Escuta, repertório e colaboração para encontrar a forma certa da sua história."], ["03", "Entrega completa", "Conceito, roteiro, captação, edição e acabamento em um fluxo claro."]].map(([n, title, description]) => (
-            <article key={n} className="border-b border-black/10 py-5 md:border-b-0 md:border-r md:px-8 md:py-0 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
+          {[["01", "Direção com intenção", "Cada escolha visual nasce da mensagem — nunca do efeito pelo efeito."], ["02", "Processo próximo", "Escuta, repertório e colaboração para encontrar a forma certa da sua história."], ["03", "Entrega completa", "Conceito, roteiro, captação, edição e acabamento em um fluxo claro."]].map(([n, title, description], index) => (
+            <motion.article key={n} initial={reducedMotion ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.55, delay: index * 0.1 }} className="border-b border-black/10 py-5 md:border-b-0 md:border-r md:px-8 md:py-0 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
               <span className="text-xs font-semibold text-[#c66d27]">{n}</span>
               <h3 className="mt-3 font-display text-lg font-medium">{title}</h3>
               <p className="mt-2 max-w-sm text-sm leading-6 text-black/50">{description}</p>
-            </article>
+            </motion.article>
           ))}
         </div>
         <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-px bg-black/15"><span className="absolute left-1/2 top-0 h-[3px] w-24 -translate-x-1/2 bg-[#d77c32]" /></div>
