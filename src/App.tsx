@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { AnimatePresence, motion, useScroll, useSpring, useTransform } from "motion/react";
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, CheckCircle2, Instagram, Mail, Menu, MousePointer2, Play, X } from "lucide-react";
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, CheckCircle2, Instagram, Mail, Menu, Play, X } from "lucide-react";
 import Pricing from "@/components/ui/pricing-02";
-import { GlowCard } from "@/components/ui/spotlight-card";
 import { Button } from "@/components/ui/button";
 
 const projects = [
@@ -64,53 +63,48 @@ function App() {
         )}
       </AnimatePresence>
 
-      <section id="inicio" className="relative min-h-screen px-4 pb-12 pt-28 md:px-8 md:pt-32">
-        <div className="pointer-events-none absolute left-[12%] top-[5%] h-80 w-80 rounded-full bg-orange-600/10 blur-[120px]" />
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
-          <div className="relative z-10 pb-4 lg:pb-10">
-            <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .1, duration: .8 }} className="font-display text-[clamp(3.4rem,8vw,7.8rem)] font-semibold leading-[.86] tracking-[-.075em]">Histórias<br />que pedem<br /><em className="font-normal text-[#f3a65a]">movimento.</em></motion.h1>
-            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: .45 }} className="mt-7 max-w-md text-sm leading-7 text-white/55 md:text-base">Transformo ideias em filmes que criam presença, despertam emoção e continuam ecoando depois do último frame.</motion.p>
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: .6 }} className="mt-8 flex flex-wrap gap-3"><Button asChild size="lg" className="bg-[#f3a65a] text-[#160b04] hover:bg-[#ffc078]"><a href="#portfolio">Ver portfólio <ArrowDown className="ml-2 size-4" /></a></Button><Button asChild size="lg" variant="outline" className="border-white/15 bg-white/[.03] text-white"><a href="#contato">Contar uma ideia</a></Button></motion.div>
-          </div>
-          <motion.div initial={{ opacity: 0, scale: .96 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: .2, duration: .9 }} className="relative">
-            <div className="group aspect-video overflow-hidden rounded-[28px] border border-white/10 bg-[#12110f] shadow-[0_3rem_8rem_-3rem_rgba(0,0,0,.95)]">
-              <img src="/images/miguel-tenorio-hero.png" alt="Miguel Tenório fotografando com uma câmera" fetchPriority="high" className="h-full w-full object-cover transition duration-1000 ease-out group-hover:scale-[1.025]" />
-              <div className="pointer-events-none absolute inset-0 rounded-[28px] bg-gradient-to-t from-black/25 via-transparent to-white/[.03]" />
-            </div>
-            <div className="absolute -bottom-5 right-5 flex items-center gap-3 rounded-full border border-white/10 bg-black/60 px-4 py-3 backdrop-blur-xl"><span className="grid size-8 place-items-center rounded-full bg-white text-black"><Play className="ml-0.5 size-3.5 fill-current" /></span><span className="text-xs"><b className="block font-display">Showreel</b><span className="text-white/40">01:24 min</span></span></div>
-          </motion.div>
+      <section id="inicio" className="relative flex min-h-screen flex-col justify-end overflow-hidden px-4 pb-10 pt-28 md:px-8 md:pb-12">
+        <motion.img initial={{ scale: 1.06 }} animate={{ scale: 1 }} transition={{ duration: 1.4, ease: "easeOut" }} src="/images/miguel-tenorio-hero.png" alt="Miguel Tenório fotografando com uma câmera" fetchPriority="high" className="absolute inset-0 h-full w-full object-cover object-[62%_center] md:object-center" />
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(8,7,6,.97)_0%,rgba(8,7,6,.88)_32%,rgba(8,7,6,.48)_58%,rgba(8,7,6,.12)_100%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(5,5,4,.5)_0%,transparent_30%,rgba(5,5,4,.2)_64%,rgba(5,5,4,.88)_100%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-black/10" />
+
+        <div className="relative z-10 mx-auto w-full max-w-7xl pb-10 md:pb-14">
+          <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .1, duration: .8 }} className="max-w-[820px] font-display text-[clamp(3.5rem,8vw,7.8rem)] font-semibold leading-[.86] tracking-[-.075em] [text-shadow:0_2px_32px_rgba(0,0,0,.35)]">Histórias<br />que pedem<br /><em className="font-normal text-[#f3a65a]">movimento.</em></motion.h1>
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: .45 }} className="mt-7 max-w-md text-sm leading-7 text-white/75 [text-shadow:0_1px_18px_rgba(0,0,0,.8)] md:text-base">Transformo ideias em filmes que criam presença, despertam emoção e continuam ecoando depois do último frame.</motion.p>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: .6 }} className="mt-8 flex flex-wrap items-center gap-3"><Button asChild size="lg" className="bg-[#f3a65a] text-[#160b04] hover:bg-[#ffc078]"><a href="#portfolio">Ver portfólio <ArrowDown className="ml-2 size-4" /></a></Button><Button asChild size="lg" variant="outline" className="border-white/25 bg-black/25 text-white backdrop-blur-md hover:bg-white/15"><a href="#contato">Contar uma ideia</a></Button><span className="ml-0 hidden items-center gap-3 rounded-full border border-white/15 bg-black/35 px-4 py-2.5 backdrop-blur-xl sm:flex md:ml-3"><span className="grid size-8 place-items-center rounded-full bg-white text-black"><Play className="ml-0.5 size-3.5 fill-current" /></span><span className="text-xs"><b className="block font-display">Showreel</b><span className="text-white/50">01:24 min</span></span></span></motion.div>
         </div>
-        <div className="mx-auto mt-16 flex max-w-7xl items-center justify-between border-t border-white/10 pt-5 text-[10px] uppercase tracking-[.18em] text-white/30"><span>Baseado no Brasil · Disponível para projetos</span><span className="hidden md:block">Role para descobrir</span></div>
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl items-center justify-between border-t border-white/15 pt-5 text-[10px] uppercase tracking-[.18em] text-white/45"><span>Baseado no Brasil · Disponível para projetos</span><span className="hidden md:block">Role para descobrir</span></div>
       </section>
 
-      <section id="quem-sou" className="relative px-4 py-24 md:px-8 md:py-36">
+      <section id="quem-sou" className="relative bg-[#f3f1ed] px-4 py-24 text-[#191714] md:px-8 md:py-36">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2 lg:gap-24">
-          <div className="lg:sticky lg:top-28 lg:self-start">
-            <div className="aspect-[4/3] rounded-[28px] border border-white/10 bg-[#12110f] p-5">
-              <div className="grid h-full place-items-center rounded-[20px] border border-dashed border-white/10 text-center"><div><MousePointer2 className="mx-auto mb-3 size-5 text-white/20" /><p className="text-xs uppercase tracking-[.18em] text-white/25">Retrato · 4:3</p></div></div>
-            </div>
-            <div className="mt-5 flex justify-between text-xs text-white/35"><span>Miguel Tenório</span><span>Videomaker independente</span></div>
-          </div>
+          <figure className="lg:sticky lg:top-24 lg:self-start">
+            <motion.img initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .8 }} src="/images/miguel-tenorio-about.png" alt="Retrato em preto e branco de Miguel Tenório" loading="lazy" className="mx-auto max-h-[760px] w-full object-contain object-bottom mix-blend-multiply [mask-image:linear-gradient(to_bottom,black_0%,black_88%,transparent_100%)]" />
+            <figcaption className="-mt-4 flex justify-between border-t border-black/10 pt-4 text-xs text-black/45"><span>Miguel Tenório</span><span>Videomaker independente</span></figcaption>
+          </figure>
           <div className="pt-2 lg:pt-24">
-            <motion.h2 initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="font-display text-4xl font-medium leading-tight tracking-tight md:text-6xl">Eu não registro apenas o que acontece. <span className="text-white/30">Eu encontro o que merece ser sentido.</span></motion.h2>
-            <p className="mt-10 max-w-xl text-base leading-8 text-white/55">Sou Miguel Tenório, videomaker apaixonado por narrativas honestas, luz natural e imagens que têm tempo para respirar. Trabalho da primeira conversa ao corte final, construindo uma linguagem visual própria para cada projeto.</p>
-            <div className="mt-16 space-y-4">
+            <motion.h2 initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="font-display text-4xl font-medium leading-tight tracking-tight md:text-6xl">Eu não registro apenas o que acontece. <span className="text-black/35">Eu encontro o que merece ser sentido.</span></motion.h2>
+            <p className="mt-10 max-w-xl text-base leading-8 text-black/60">Sou Miguel Tenório, videomaker apaixonado por narrativas honestas, luz natural e imagens que têm tempo para respirar. Trabalho da primeira conversa ao corte final, construindo uma linguagem visual própria para cada projeto.</p>
+            <div className="mt-16 border-b border-black/15">
               {[["01", "Direção com intenção", "Cada escolha visual nasce da mensagem — nunca do efeito pelo efeito."], ["02", "Processo próximo", "Escuta, repertório e colaboração para encontrar a forma certa da sua história."], ["03", "Entrega completa", "Conceito, roteiro, captação, edição e acabamento em um fluxo claro."]].map(([n, title, text]) => (
-                <GlowCard key={n} customSize className="h-auto min-h-36 w-full p-6" glowColor="orange"><div className="grid gap-4 sm:grid-cols-[48px_1fr]"><span className="text-xs text-[#f3a65a]">{n}</span><div><h3 className="font-display text-xl font-medium">{title}</h3><p className="mt-2 max-w-md text-sm leading-6 text-white/45">{text}</p></div></div></GlowCard>
+                <motion.article key={n} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="grid gap-4 border-t border-black/15 py-7 sm:grid-cols-[48px_1fr]"><span className="text-xs font-semibold text-[#c66d27]">{n}</span><div><h3 className="font-display text-xl font-medium">{title}</h3><p className="mt-2 max-w-md text-sm leading-6 text-black/50">{text}</p></div></motion.article>
               ))}
             </div>
           </div>
         </div>
+        <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-px bg-black/15"><span className="absolute left-1/2 top-0 h-[3px] w-24 -translate-x-1/2 bg-[#d77c32]" /></div>
       </section>
 
-      <section id="importancia" className="relative bg-[#e9a564] px-4 py-28 text-[#1c1008] md:px-8 md:py-40">
+      <section id="importancia" className="relative overflow-hidden bg-[#fffdf9] px-4 py-28 text-[#1c1008] md:px-8 md:py-40">
+        <div className="pointer-events-none absolute -right-24 top-0 size-[520px] rounded-full bg-[#e9a564]/20 blur-[130px]" />
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-10 lg:grid-cols-[1.25fr_.75fr] lg:items-end">
-            <h2 className="font-display text-[clamp(3rem,7vw,7rem)] font-semibold leading-[.9] tracking-[-.065em]">A atenção passa.<br />A história <em className="font-normal">fica.</em></h2>
+            <h2 className="font-display text-[clamp(3rem,7vw,7rem)] font-semibold leading-[.9] tracking-[-.065em]">A atenção passa.<br />A história <em className="font-normal text-[#c66d27]">fica.</em></h2>
             <p className="max-w-md text-base leading-7 opacity-65">Um bom vídeo não preenche espaço. Ele organiza percepção, cria confiança e transforma uma marca em algo que as pessoas conseguem lembrar — e sentir.</p>
           </div>
           <div className="mt-20 grid border-y border-black/15 md:grid-cols-3">
-            {[["03s", "para criar uma primeira impressão"], ["80%", "do consumo digital passa pelo vídeo"], ["1 ideia", "pode virar uma narrativa memorável"]].map(([value, label], i) => <motion.div key={value} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * .12 }} className="border-b border-black/15 py-10 md:border-b-0 md:border-r md:px-8 first:pl-0 last:border-r-0"><strong className="font-display text-5xl font-semibold">{value}</strong><p className="mt-3 max-w-[220px] text-sm leading-6 opacity-55">{label}</p></motion.div>)}
+            {[["03s", "para criar uma primeira impressão"], ["80%", "do consumo digital passa pelo vídeo"], ["1 ideia", "pode virar uma narrativa memorável"]].map(([value, label], i) => <motion.div key={value} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * .12 }} className="border-b border-black/15 py-10 md:border-b-0 md:border-r md:px-8 first:pl-0 last:border-r-0"><strong className="font-display text-5xl font-semibold text-[#b85f21]">{value}</strong><p className="mt-3 max-w-[220px] text-sm leading-6 opacity-55">{label}</p></motion.div>)}
           </div>
         </div>
       </section>
