@@ -77,21 +77,40 @@ function App() {
         <div className="relative z-10 mx-auto flex w-full max-w-7xl items-center justify-between border-t border-white/15 pt-5 text-[10px] uppercase tracking-[.18em] text-white/45"><span>Baseado no Brasil · Disponível para projetos</span><span className="hidden md:block">Role para descobrir</span></div>
       </section>
 
-      <section id="quem-sou" className="relative bg-[#f3f1ed] px-4 py-24 text-[#191714] md:px-8 md:py-36">
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2 lg:gap-24">
-          <figure className="lg:sticky lg:top-24 lg:self-start">
-            <motion.img initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .8 }} src="/images/miguel-tenorio-about.png" alt="Retrato em preto e branco de Miguel Tenório" loading="lazy" className="mx-auto max-h-[760px] w-full object-contain object-bottom mix-blend-multiply [mask-image:linear-gradient(to_bottom,black_0%,black_88%,transparent_100%)]" />
-            <figcaption className="-mt-4 flex justify-between border-t border-black/10 pt-4 text-xs text-black/45"><span>Miguel Tenório</span><span>Videomaker independente</span></figcaption>
-          </figure>
-          <div className="pt-2 lg:pt-24">
-            <motion.h2 initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="font-display text-4xl font-medium leading-tight tracking-tight md:text-6xl">Eu não registro apenas o que acontece. <span className="text-black/35">Eu encontro o que merece ser sentido.</span></motion.h2>
-            <p className="mt-10 max-w-xl text-base leading-8 text-black/60">Sou Miguel Tenório, videomaker apaixonado por narrativas honestas, luz natural e imagens que têm tempo para respirar. Trabalho da primeira conversa ao corte final, construindo uma linguagem visual própria para cada projeto.</p>
-            <div className="mt-16 border-b border-black/15">
-              {[["01", "Direção com intenção", "Cada escolha visual nasce da mensagem — nunca do efeito pelo efeito."], ["02", "Processo próximo", "Escuta, repertório e colaboração para encontrar a forma certa da sua história."], ["03", "Entrega completa", "Conceito, roteiro, captação, edição e acabamento em um fluxo claro."]].map(([n, title, text]) => (
-                <motion.article key={n} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="grid gap-4 border-t border-black/15 py-7 sm:grid-cols-[48px_1fr]"><span className="text-xs font-semibold text-[#c66d27]">{n}</span><div><h3 className="font-display text-xl font-medium">{title}</h3><p className="mt-2 max-w-md text-sm leading-6 text-black/50">{text}</p></div></motion.article>
-              ))}
-            </div>
+      <section id="quem-sou" className="relative bg-[#f6f5f2] text-[#191714]">
+        <div className="relative overflow-hidden bg-[#eeece9]">
+          <img
+            src="/images/miguel-tenorio-about-banner.png"
+            alt="Miguel Tenório em retrato preto e branco"
+            loading="lazy"
+            className="absolute inset-x-0 top-0 h-[440px] w-full object-cover object-[32%_center] md:h-full md:object-center"
+          />
+          <div className="pointer-events-none absolute inset-x-0 top-[360px] h-32 bg-gradient-to-b from-transparent to-[#f6f5f2] md:hidden" />
+          <div className="relative mx-auto flex min-h-[730px] max-w-7xl items-end px-4 pb-10 pt-[390px] md:min-h-[680px] md:items-center md:justify-end md:px-8 md:py-20">
+            <motion.div
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.7 }}
+              className="w-full bg-[#f6f5f2]/95 px-7 py-9 shadow-[0_18px_70px_rgba(28,25,22,.11)] backdrop-blur-md sm:px-10 md:max-w-[560px] md:px-12 md:py-12"
+            >
+              <h2 className="font-display text-[clamp(2.25rem,4.1vw,3.75rem)] font-medium leading-[1.04] tracking-[-.055em]">
+                Eu não registro apenas o que acontece. <span className="text-black/35">Eu encontro o que merece ser sentido.</span>
+              </h2>
+              <p className="mt-7 max-w-[440px] text-sm leading-7 text-black/60">
+                Sou Miguel Tenório, videomaker apaixonado por narrativas honestas, luz natural e imagens que têm tempo para respirar. Trabalho da primeira conversa ao corte final, construindo uma linguagem visual própria para cada projeto.
+              </p>
+            </motion.div>
           </div>
+        </div>
+        <div className="mx-auto grid max-w-7xl border-t border-black/10 px-4 py-9 md:grid-cols-3 md:px-8 md:py-12">
+          {[["01", "Direção com intenção", "Cada escolha visual nasce da mensagem — nunca do efeito pelo efeito."], ["02", "Processo próximo", "Escuta, repertório e colaboração para encontrar a forma certa da sua história."], ["03", "Entrega completa", "Conceito, roteiro, captação, edição e acabamento em um fluxo claro."]].map(([n, title, description]) => (
+            <article key={n} className="border-b border-black/10 py-5 md:border-b-0 md:border-r md:px-8 md:py-0 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
+              <span className="text-xs font-semibold text-[#c66d27]">{n}</span>
+              <h3 className="mt-3 font-display text-lg font-medium">{title}</h3>
+              <p className="mt-2 max-w-sm text-sm leading-6 text-black/50">{description}</p>
+            </article>
+          ))}
         </div>
         <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-px bg-black/15"><span className="absolute left-1/2 top-0 h-[3px] w-24 -translate-x-1/2 bg-[#d77c32]" /></div>
       </section>

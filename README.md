@@ -28,7 +28,7 @@ npm run lint
 Os espaços de mídia foram deixados sem imagens, conforme o briefing:
 
 - Hero: banner 16:9 em `public/images/miguel-tenorio-hero.png`
-- Quem sou: retrato em preto e branco em `public/images/miguel-tenorio-about.png`
+- Quem sou: banner horizontal em preto e branco em `public/images/miguel-tenorio-about-banner.png`
 - Portfólio: mídias individuais nas proporções indicadas em cada card
 
 O formulário possui validação e estado de sucesso no front-end. Para envios reais, conecte o `submit` em `src/App.tsx` ao serviço de formulário ou API escolhido.
